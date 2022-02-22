@@ -63,8 +63,8 @@ if (slice.iceVersion.contains("3.7")) {
 } else if (slice.iceVersion.contains("3.6")) {
     slice.output = file("${generatedDir}/ice36")
     dependencies {
-        implementation "com.zeroc:icegrid:3.6.4"
-        implementation "com.zeroc:icestorm:3.6.4"
+        implementation "com.zeroc:icegrid:3.6.5"
+        implementation "com.zeroc:icestorm:3.6.5"
     }
     sourceSets.main.java {
         srcDirs "src/main/ice36", slice.output
