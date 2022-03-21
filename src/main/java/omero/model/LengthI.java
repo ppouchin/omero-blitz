@@ -944,6 +944,12 @@ public class LengthI extends Length implements ModelBased {
         return Collections.unmodifiableMap(c);
     }
 
+    private static Map<UnitsLength, Conversion> createMapPIXEL() {
+        EnumMap<UnitsLength, Conversion> c =
+                new EnumMap<UnitsLength, Conversion>(UnitsLength.class);
+        return Collections.unmodifiableMap(c);
+    }
+
     private static Map<UnitsLength, Conversion> createMapPOINT() {
         EnumMap<UnitsLength, Conversion> c =
             new EnumMap<UnitsLength, Conversion>(UnitsLength.class);
@@ -978,6 +984,12 @@ public class LengthI extends Length implements ModelBased {
         c.put(UnitsLength.YOTTAMETER, Mul(Rat(Int(1), Mul(Int(28346472), Pow(10, 20))), Sym("pt")));
         c.put(UnitsLength.ZEPTOMETER, Mul(Rat(Mul(Int(125), Pow(10, 22)), Int(3543309)), Sym("pt")));
         c.put(UnitsLength.ZETTAMETER, Mul(Rat(Int(1), Mul(Int(28346472), Pow(10, 17))), Sym("pt")));
+        return Collections.unmodifiableMap(c);
+    }
+
+    private static Map<UnitsLength, Conversion> createMapREFERENCEFRAME() {
+        EnumMap<UnitsLength, Conversion> c =
+                new EnumMap<UnitsLength, Conversion>(UnitsLength.class);
         return Collections.unmodifiableMap(c);
     }
 
@@ -1270,7 +1282,9 @@ public class LengthI extends Length implements ModelBased {
         c.put(UnitsLength.PARSEC, createMapPARSEC());
         c.put(UnitsLength.PETAMETER, createMapPETAMETER());
         c.put(UnitsLength.PICOMETER, createMapPICOMETER());
+        c.put(UnitsLength.PIXEL, createMapPIXEL());
         c.put(UnitsLength.POINT, createMapPOINT());
+        c.put(UnitsLength.REFERENCEFRAME, createMapREFERENCEFRAME());
         c.put(UnitsLength.TERAMETER, createMapTERAMETER());
         c.put(UnitsLength.THOU, createMapTHOU());
         c.put(UnitsLength.YARD, createMapYARD());
