@@ -95,4 +95,9 @@ public class UnitsTest {
     public void testLengthMappingFromPixelToMicrometer() throws BigResult {
         new LengthI(mm(1, UnitsLength.PIXEL), UnitsLength.MICROMETER);
     }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testLengthMappingFromReferenceFrameToMicrometer() throws BigResult {
+        new LengthI(mm(1, UnitsLength.REFERENCEFRAME), UnitsLength.MICROMETER);
+    }
 }
