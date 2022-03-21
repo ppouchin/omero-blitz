@@ -90,4 +90,9 @@ public class UnitsTest {
     public void testLengthMappingFromCentimeterToMeter() throws BigResult {
         new LengthI(mm(1, UnitsLength.CENTIMETER), UnitsLength.METER);
     }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testLengthMappingFromPixelToMicrometer() throws BigResult {
+        new LengthI(mm(1, UnitsLength.PIXEL), UnitsLength.MICROMETER);
+    }
 }
