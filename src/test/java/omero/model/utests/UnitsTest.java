@@ -16,7 +16,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package ome.formats.utests;
+package omero.model.utests;
 
 import ome.model.units.BigResult;
 import ome.units.UNITS;
