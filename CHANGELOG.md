@@ -1,3 +1,14 @@
+5.5.9 (April 2021)
+------------------
+
+- Use ice 3.6.5 ([#125](https://github.com/ome/omero-blitz/pull/125))
+- Use Maven central ([#115](https://github.com/ome/omero-blitz/pull/115))
+- Bump plugin version ([#117](https://github.com/ome/omero-blitz/pull/117))
+- Use Gradle 6 ([#114](https://github.com/ome/omero-blitz/pull/114))
+- Use GitHub action ([#113](https://github.com/ome/omero-blitz/pull/113))
+- Bump omero-server version to 5.6.2
+- Bump omero-common-test version to 5.5.8
+
 5.5.8 (September 2020)
 ----------------------
 
