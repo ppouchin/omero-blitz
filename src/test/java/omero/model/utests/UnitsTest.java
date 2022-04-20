@@ -16,7 +16,7 @@
  * 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
  */
 
-package ome.formats.utests;
+package omero.model.utests;
 
 import ome.model.units.BigResult;
 import ome.units.UNITS;
@@ -89,5 +89,15 @@ public class UnitsTest {
     @Test
     public void testLengthMappingFromCentimeterToMeter() throws BigResult {
         new LengthI(mm(1, UnitsLength.CENTIMETER), UnitsLength.METER);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testLengthMappingFromPixelToMicrometer() throws BigResult {
+        new LengthI(mm(1, UnitsLength.PIXEL), UnitsLength.MICROMETER);
+    }
+
+    @Test(expectedExceptions = IllegalArgumentException.class)
+    public void testLengthMappingFromReferenceFrameToMicrometer() throws BigResult {
+        new LengthI(mm(1, UnitsLength.REFERENCEFRAME), UnitsLength.MICROMETER);
     }
 }
