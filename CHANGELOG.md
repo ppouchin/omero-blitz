@@ -1,3 +1,10 @@
+5.5.10 (April 2021)
+------------------
+
+- Fix conversion NPE for PIXELS and REFERENCEFRAME ([#126](https://github.com/ome/omero-blitz/pull/126))
+- Bump omero-server version to 5.6.3
+- Bump omero-common-test version to 5.5.9
+
 5.5.9 (April 2021)
 ------------------
 
