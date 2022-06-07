@@ -11,10 +11,8 @@ task zipIcedoc(type: Zip) {
 
 publishing {
     publications {
-        blitzPython(MavenPublication) {
+        omeroBlitz {
             artifact pythonZip
-        }
-        blitzIcedoc(MavenPublication) {
             artifact zipIcedoc
         }
     }
