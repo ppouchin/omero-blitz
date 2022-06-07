@@ -1,11 +1,19 @@
-5.5.10 (April 2021)
+5.5.11 (June 2022)
+------------------
+
+- Bump omero-server version to 5.6.4 ([#127](https://github.com/ome/omero-blitz/pull/127))
+- Bump omero-common-test version to 5.5.10
+- Bump org.openmicroscopy.project plugin to 5.5.4 ([#127](https://github.com/ome/omero-blitz/pull/127))
+- Add Gradle publication workflow ([#127](https://github.com/ome/omero-blitz/pull/127))
+
+5.5.10 (April 2022)
 ------------------
 
 - Fix conversion NPE for PIXELS and REFERENCEFRAME ([#126](https://github.com/ome/omero-blitz/pull/126))
 - Bump omero-server version to 5.6.3
 - Bump omero-common-test version to 5.5.9
 
-5.5.9 (April 2021)
+5.5.9 (April 2022)
 ------------------
 
 - Use ice 3.6.5 ([#125](https://github.com/ome/omero-blitz/pull/125))
