@@ -1,3 +1,8 @@
+5.5.12 (June 2022)
+------------------
+
+- Add python/icedoc zip artifacts to the omeroBlitz Gradle publication ([#128](https://github.com/ome/omero-blitz/pull/128))
+
 5.5.11 (June 2022)
 ------------------
 
