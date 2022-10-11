@@ -573,7 +573,7 @@ public class DuplicateI extends Duplicate implements IRequest, ReadOnlyStatus.Is
                         final String linkedClassName = forwardLink.getKey();
                         final String property = forwardLink.getValue();
                         /* ignore details for now, duplicates never preserve original ownership */
-                        if (property.startsWith("details.")) {
+                        if (property.startsWith("details.") && !property.equals("details.externalInfo")) {
                             continue;
                         }
                         /* note which of the objects to which the original links should be ignored */
