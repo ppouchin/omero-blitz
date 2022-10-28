@@ -860,6 +860,14 @@ public class ImportLibrary implements IObservable
     // =========================================================================
 
     /**
+     * Retrieves the currently active metadata store.
+     * @return See above.
+     */
+    public OMEROMetadataStoreClient getMetadataStore() {
+        return store;
+    }
+
+    /**
      * Retrieves the first managed repository from the list of current active
      * repositories.
      * @return Active proxy for the legacy repository.
