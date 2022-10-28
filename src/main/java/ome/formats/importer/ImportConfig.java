@@ -648,11 +648,17 @@ public class ImportConfig {
      *  if can't log in request needed information
      */
     public void requestFromUser() {
-        if (!canLogin()) {
-            loadAll();
-            prompt(hostname, " Enter server name: ", false);
-            prompt(username, " Enter user name: ", false);
-            prompt(password, " Enter password: ", true);
+        if (hostname.empty()) {
+            hostname.set(System.console().readLine("Hostname: "));
+        }
+        if (sessionKey.empty()) {
+            if (username.empty()) {
+                username.set(System.console().readLine("Username: "));
+            }
+            if (password.empty()) {
+                username.set(new String(
+                        System.console().readPassword("Password: ")));
+            }
         }
     }
 
