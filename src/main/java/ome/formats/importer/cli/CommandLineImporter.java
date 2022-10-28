@@ -163,7 +163,7 @@ public class CommandLineImporter {
             reader.setMetadataOptions(
                     new DynamicMetadataOptions(MetadataLevel.ALL));
 
-            library = new ImportLibrary(store, reader,
+            library = createImportLibrary(store, reader,
                     transfer, exclusions, minutesToWait);
 
             if (config.checkUpgrade.get()) {
@@ -178,6 +178,22 @@ public class CommandLineImporter {
                 cleanup();
             }
         });
+    }
+
+    /**
+     * Creates the {@link ImportLibrary} that this command line importer will
+     * use to import data
+     * @param client Bio-Formats {@link MetadataStore} implementation for OMERO
+     * @param reader Bio-Formats reader wrapper customized for OMERO
+     * @param transfer {@link FileTransfer} mechanism to be used for uploading
+     * @param exclusions {@link FileExclusion} mechanisms for skipping candidates
+     * @param minutesToWait for how many minutes to wait for an import (negative for indefinitely)
+     * @return See above.
+     */
+    protected ImportLibrary createImportLibrary(
+            OMEROMetadataStoreClient client, OMEROWrapper reader, FileTransfer transfer,
+            List<FileExclusion> exclusions, int minutesToWait) {
+        return new ImportLibrary(store, reader, transfer, exclusions, minutesToWait);
     }
 
     /**
