@@ -79,19 +79,19 @@ public class CommandLineImporter {
     public final ErrorHandler handler;
 
     /** Bio-Formats reader wrapper customized for OMERO. */
-    private final OMEROWrapper reader;
+    protected final OMEROWrapper reader;
 
     /** Bio-Formats {@link MetadataStore} implementation for OMERO. */
-    private final OMEROMetadataStoreClient store;
+    protected final OMEROMetadataStoreClient store;
 
     /** Candidates for import */
-    private final ImportCandidates candidates;
+    protected final ImportCandidates candidates;
 
     /** If true, then only a report on used files will be produced */
-    private final boolean getUsedFiles;
+    protected final boolean getUsedFiles;
 
     /** Format which should be preferred for standard out messages */
-    private ImportOutput importOutput = ImportOutput.ids;
+    protected ImportOutput importOutput = ImportOutput.ids;
 
     /**
      * Legacy constructor which uses a {@link UploadFileTransfer}.
