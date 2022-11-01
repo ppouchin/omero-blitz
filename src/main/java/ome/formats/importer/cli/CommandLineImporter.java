@@ -154,11 +154,7 @@ public class CommandLineImporter {
 
         } else {
 
-            // Ensure that we have all of our required login arguments
-            if (!config.canLogin()) {
-                // config.requestFromUser(); // stdin if anything missing.
-                usage(); // EXITS TODO this should check for a "quiet" flag
-            }
+            checkLogin();
             store = config.createStore();
             store.logVersionInfo(config.getIniVersionNumber());
             reader.setMetadataOptions(
@@ -179,6 +175,18 @@ public class CommandLineImporter {
                 cleanup();
             }
         });
+    }
+
+    /**
+     * Checks that requisite command line options for OMERO session
+     * creation have been provided and if not calls
+     * {@link CommandLineImporter#usage()}.
+     */
+    protected void checkLogin() {
+        // Ensure that we have all of our required login arguments
+        if (!config.canLogin()) {
+            usage(); // EXITS TODO this should check for a "quiet" flag
+        }
     }
 
     /**
