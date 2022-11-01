@@ -156,7 +156,8 @@ public class CommandLineImporter {
 
             // Ensure that we have all of our required login arguments
             if (!config.canLogin()) {
-                config.requestFromUser(); // stdin if anything missing.
+                // config.requestFromUser(); // stdin if anything missing.
+                usage(); // EXITS TODO this should check for a "quiet" flag
             }
             store = config.createStore();
             store.logVersionInfo(config.getIniVersionNumber());
