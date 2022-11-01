@@ -64,7 +64,7 @@ import org.slf4j.LoggerFactory;
  * Stateful class for use by {@link CommandLineImporter} to interact
  * with server-side processes which are running.
  */
-class ImportCloser {
+public class ImportCloser {
 
     private final static Logger log = LoggerFactory.getLogger(ImportCloser.class);
 

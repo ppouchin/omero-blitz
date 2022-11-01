@@ -23,7 +23,7 @@ package ome.formats.importer.cli;
 /**
  * Styles of output which are supported by the {@link CommandLineImporter}.
  */
-enum ImportOutput {
+public enum ImportOutput {
 
     ids,
     legacy,
