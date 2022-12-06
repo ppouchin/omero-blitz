@@ -656,7 +656,7 @@ public class ImportConfig {
                 username.set(System.console().readLine("Username: "));
             }
             if (password.empty()) {
-                username.set(new String(
+                password.set(new String(
                         System.console().readPassword("Password: ")));
             }
         }
