@@ -1,3 +1,13 @@
+5.6.0 (December 2022)
+---------------------
+
+- Command line importer developer user experience improvements ([#130](https://github.com/ome/omero-blitz/pull/130))
+- Explicitly include details.externalInfo when relinking duplicate objects ([#129](https://github.com/ome/omero-blitz/pull/129))
+- Bump TestNG to 7.5 ([#124](https://github.com/ome/omero-blitz/pull/124))
+- Bump omero-common-test version to 5.6.0
+- Bump omero-server version to 5.6.5
+
+
 5.5.12 (June 2022)
 ------------------
 
