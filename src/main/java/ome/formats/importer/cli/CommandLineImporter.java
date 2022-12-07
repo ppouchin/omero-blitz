@@ -79,19 +79,19 @@ public class CommandLineImporter {
     public final ErrorHandler handler;
 
     /** Bio-Formats reader wrapper customized for OMERO. */
-    private final OMEROWrapper reader;
+    protected final OMEROWrapper reader;
 
     /** Bio-Formats {@link MetadataStore} implementation for OMERO. */
-    private final OMEROMetadataStoreClient store;
+    protected final OMEROMetadataStoreClient store;
 
     /** Candidates for import */
-    private final ImportCandidates candidates;
+    protected final ImportCandidates candidates;
 
     /** If true, then only a report on used files will be produced */
-    private final boolean getUsedFiles;
+    protected final boolean getUsedFiles;
 
     /** Format which should be preferred for standard out messages */
-    private ImportOutput importOutput = ImportOutput.ids;
+    protected ImportOutput importOutput = ImportOutput.ids;
 
     /**
      * Legacy constructor which uses a {@link UploadFileTransfer}.
@@ -154,17 +154,13 @@ public class CommandLineImporter {
 
         } else {
 
-            // Ensure that we have all of our required login arguments
-            if (!config.canLogin()) {
-                // config.requestFromUser(); // stdin if anything missing.
-                usage(); // EXITS TODO this should check for a "quiet" flag
-            }
+            checkLogin();
             store = config.createStore();
             store.logVersionInfo(config.getIniVersionNumber());
             reader.setMetadataOptions(
                     new DynamicMetadataOptions(MetadataLevel.ALL));
 
-            library = new ImportLibrary(store, reader,
+            library = createImportLibrary(store, reader,
                     transfer, exclusions, minutesToWait);
 
             if (config.checkUpgrade.get()) {
@@ -179,6 +175,34 @@ public class CommandLineImporter {
                 cleanup();
             }
         });
+    }
+
+    /**
+     * Checks that requisite command line options for OMERO session
+     * creation have been provided and if not calls
+     * {@link CommandLineImporter#usage()}.
+     */
+    protected void checkLogin() {
+        // Ensure that we have all of our required login arguments
+        if (!config.canLogin()) {
+            usage(); // EXITS TODO this should check for a "quiet" flag
+        }
+    }
+
+    /**
+     * Creates the {@link ImportLibrary} that this command line importer will
+     * use to import data
+     * @param client Bio-Formats {@link MetadataStore} implementation for OMERO
+     * @param reader Bio-Formats reader wrapper customized for OMERO
+     * @param transfer {@link FileTransfer} mechanism to be used for uploading
+     * @param exclusions {@link FileExclusion} mechanisms for skipping candidates
+     * @param minutesToWait for how many minutes to wait for an import (negative for indefinitely)
+     * @return See above.
+     */
+    protected ImportLibrary createImportLibrary(
+            OMEROMetadataStoreClient client, OMEROWrapper reader, FileTransfer transfer,
+            List<FileExclusion> exclusions, int minutesToWait) {
+        return new ImportLibrary(store, reader, transfer, exclusions, minutesToWait);
     }
 
     /**
