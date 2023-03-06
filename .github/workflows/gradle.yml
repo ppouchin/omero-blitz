@@ -15,7 +15,7 @@ jobs:
   publish_snapshots:
     if: ${{ github.ref == 'refs/heads/master' && github.repository_owner == 'ome' }}
     needs: build
-    uses: ome/action-workflows/.github/workflows/gradle_publish.yml@v1.2
+    uses: ome/action-workflows/.github/workflows/gradle_publish.yml@v2
     with:
       install-ice: true
       ARTIFACTORY_URL: "snapshots"
