@@ -1,3 +1,11 @@
+5.6.1 (March 2023)
+------------------
+
+- Push to releases folder on artifactory ([#134](https://github.com/ome/omero-blitz/pull/134))
+- Declare logback-classic as explicit dependency ([#133](https://github.com/ome/omero-blitz/pull/133))
+- Bump omero-common-test version to 5.6.1
+- Bump omero-server version to 5.6.7
+
 5.6.0 (December 2022)
 ---------------------
 
