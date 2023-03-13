@@ -1,3 +1,8 @@
+5.6.2 (March 2023)
+------------------
+
+- Set logback dependency to 1.2.x ([#136](https://github.com/ome/omero-blitz/pull/136))
+
 5.6.1 (March 2023)
 ------------------
 
