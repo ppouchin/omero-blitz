@@ -767,19 +767,42 @@ public class PublicRepositoryI implements _RepositoryOperations, ApplicationCont
         }
 
         // Now we are ready to work on the actual intended path.
-        checked = paths.removeFirst(); // Size is now empty
-        if (checked.exists()) {
-            if (parents) {
-                assertFindDir(checked, s, sf, sql);
-            } else {
-                throw new omero.ResourceError(null, null,
-                    "Path exists on disk: " + checked.fsFile);
+        while (paths.size() > 0) {
+            checked = paths.removeFirst(); // Size is now empty
+            if (checked.exists()) {
+                if (parents) {
+                    assertFindDir(checked, s, sf, sql);
+                } else {
+                    throw new omero.ResourceError(null, null,
+                                                  "Path exists on disk: " + checked.fsFile);
+                }
+            } else if (fileCreationListener != null) {
+                fileCreationListener.accept(checked);
             }
-        } else if (fileCreationListener != null) {
-            fileCreationListener.accept(checked);
+            try {
+                repositoryDao.register(repoUuid, checked,
+                                       DIRECTORY_MIMETYPE, sf, sql, s);
+            } catch (ValidationException ve) {
+                if (ve.getCause() instanceof SQLException) {
+                    // Could have collided with another thread also creating the directory.
+                    // See Trac #11096 regarding originalfile table uniqueness of columns repo, path, name.
+                    // So, give the other thread time to complete registration.
+                    SleepTimer.sleepFor(1000);
+                    if (checked.exists()) {
+                        // The path now exists! It did not a moment ago.
+                        // We are not going to rethrow the validation exception,
+                        // so we otherwise note that something unexpected did occur.
+                        log.warn("retrying after exception in registering directory " + checked + ": " + ve.getCause());
+                        // Another thread may have succeeded where this one failed,
+                        // so try this directory again.
+                        paths.add(0, checked);
+                        continue;
+                    }
+                }
+                // We cannot recover from the validation exception.
+                throw ve;
+            }
         }
-        repositoryDao.register(repoUuid, checked,
-                DIRECTORY_MIMETYPE, sf, sql, s);
     }
 
     //
