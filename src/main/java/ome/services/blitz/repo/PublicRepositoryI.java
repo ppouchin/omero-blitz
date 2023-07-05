@@ -40,6 +40,7 @@ import com.google.common.collect.ImmutableList.Builder;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
+import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
@@ -782,15 +783,13 @@ public class PublicRepositoryI implements _RepositoryOperations, ApplicationCont
             try {
                 repositoryDao.register(repoUuid, checked,
                                        DIRECTORY_MIMETYPE, sf, sql, s);
-            } catch (ValidationException ve) {
+            } catch (ConstraintViolationException ve) {
                 if (ve.getCause() instanceof SQLException) {
                     // Could have collided with another thread also creating the directory.
-                    // See Trac #11096 regarding originalfile table uniqueness of columns repo, path, name.
-                    // So, give the other thread time to complete registration.
                     SleepTimer.sleepFor(1000);
                     if (checked.exists()) {
                         // The path now exists! It did not a moment ago.
-                        // We are not going to rethrow the validation exception,
+                        // We are not going to rethrow the constraint violation exception,
                         // so we otherwise note that something unexpected did occur.
                         log.warn("retrying after exception in registering directory " + checked + ": " + ve.getCause());
                         // Another thread may have succeeded where this one failed,
@@ -799,7 +798,7 @@ public class PublicRepositoryI implements _RepositoryOperations, ApplicationCont
                         continue;
                     }
                 }
-                // We cannot recover from the validation exception.
+                // We cannot recover from the constraint violation exception.
                 throw ve;
             }
         }
